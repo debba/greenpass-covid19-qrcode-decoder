@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block title %}Decode Now!{% endblock %}
+
+{% block content %}
+<div class="bd-example" align="middle">
+    COVID 19 QRCODE DECODER
+    <form method="POST"  action="/qrdata"  enctype="multipart/form-data">
+        <input type="file" name="image">
+        <input type="submit">
+    </form>
+</div>
+{% endblock %}
