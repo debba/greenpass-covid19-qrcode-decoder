@@ -2,5 +2,12 @@
 {% block title %}Result!{% endblock %}
 
 {% block content %}
-DATA: {{data|safe}}
+<div class="container">
+    <h2>Your personal details</h2>
+    <div class="card">
+        <div class="card-body">
+            {{data|safe}}
+        </div>
+    </div>
+</div>
 {% endblock %}
