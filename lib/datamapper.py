@@ -12,7 +12,7 @@ class DataMapper:
     json = ''
     new_json = {}
 
-    def _save_json(self, data, schema, level=0, json = {}):
+    def _save_json(self, data, schema, level=0):
         for key, value in data.items():
             description = schema[key].get('title') or schema[key].get('description') or key
             description, _, _ = description.partition(' - ')
@@ -33,7 +33,6 @@ class DataMapper:
                 print('SC')
                 self.json += '<p>' + ('&nbsp;' * level) + '<strong>' + description + '</strong>' + ':' + str(
                     value) + '</p>'
-        return json
 
     def __set_schema(self, schema_url):
         sch = urlopen(schema_url)
