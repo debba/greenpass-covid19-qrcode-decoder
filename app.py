@@ -62,7 +62,7 @@ def qrdata():
         recursive_save_data(data[-260][1], app.glb_schema['properties'])
 
         return render_template('data.html', data=app.converted_schema)
-    return render_template('error.html')
+    return render_template('error.html', error='UPLOAD_IMAGE_WITH_NO_NAME')
 
 
 if __name__ == '__main__':

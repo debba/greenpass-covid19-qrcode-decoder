@@ -2,5 +2,10 @@
 {% block title %}Error detected!{% endblock %}
 
 {% block content %}
-ERRORE
+    <div class="container">
+        <h2>ERROR</h2>
+        <div class="alert alert-danger">
+            {{error}}
+        </div>
+    </div>
 {% endblock %}
