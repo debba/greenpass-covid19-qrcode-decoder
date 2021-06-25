@@ -4,19 +4,19 @@
 {% block content %}
 
 <p class="lead text-muted">
-    What information does your Covid-19 Green Pass QR code contain? All you need to know about the Covid-19 Green Pass QR code. Please upload the file here to find out.
+    {{ _('What information does your Covid-19 Green Pass QR code contain? Please upload the file here to find out.') }}
 </p>
 <ul class="small">
-    <li>No data will be stored</li>
-    <li>Don't you trust it? Explore the <a href="https://github.com/debba/greenpass-covid19-qrcode-decoder">open-source
-        code</a> and create your own instance.
+    <li>{{ _('No data will be stored') }}</li>
+    <li>
+        {% trans url=github_project %}Don't you trust it? Explore the <a href="{{url}}">open source code</a>  and create your own instance!{% endtrans %}
     </li>
 </ul>
 <form method="POST" action="/qrdata" enctype="multipart/form-data">
     <div class="input-group">
         <input type="file" name="image" accept="image/*" class="form-control" id="pickFileInput"
                aria-describedby="pickFile" aria-label="Browse">
-        <button class="btn btn-dark me-2" type="submit" id="pickFile">Get data</button>
+        <button class="btn btn-dark me-2" type="submit" id="pickFile">{{ _('Get data') }}</button>
     </div>
 
 </form>

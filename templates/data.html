@@ -2,7 +2,7 @@
 {% block title %}Result!{% endblock %}
 
 {% block content %}
-<h2>Your personal details</h2>
+<h2>{{ _('Your personal details') }}</h2>
 <div class="card">
     <div class="card-body">
         {{data|safe}}
@@ -11,7 +11,7 @@
 
 <div class="border border-light p-3 mb-4">
     <div class="text-center">
-        <a href="/" class="btn btn-primary">Back to home page.</a>
+        <a href="/" class="btn btn-primary">{{ _('Back to home page') }}</a>
     </div>
 </div>
 {% endblock %}

@@ -1,0 +1,64 @@
+# Translations template for PROJECT.
+# Copyright (C) 2021 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2021-06-25 12:48+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: app.py:43
+msgid "Green Pass COVID-19 QRCode Decoder"
+msgstr ""
+
+#: templates/data.html:5
+msgid "Your personal details"
+msgstr ""
+
+#: templates/data.html:14
+msgid "Back to home page"
+msgstr ""
+
+#: templates/error.html:7
+msgid "Error: image extension is not valid."
+msgstr ""
+
+#: templates/error.html:10
+msgid "General Error: please retry."
+msgstr ""
+
+#: templates/home.html:7
+msgid ""
+"What information does your Covid-19 Green Pass QR code contain? Please "
+"upload the file here to find out."
+msgstr ""
+
+#: templates/home.html:10
+msgid "No data will be stored"
+msgstr ""
+
+#: templates/home.html:12
+#, python-format
+msgid ""
+"Don't you trust it? Explore the <a href=\"%(url)s\">open source code</a>"
+"  and create your own instance!"
+msgstr ""
+
+#: templates/home.html:19
+msgid "Get data"
+msgstr ""
+
+#: templates/layout.html:48
+msgid "This project is open source"
+msgstr ""
+

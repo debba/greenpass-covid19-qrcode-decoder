@@ -4,9 +4,10 @@ from base45 import b45decode
 from zlib import decompress
 from flynn import decoder as flynn_decoder
 from urllib.request import urlopen
-from flask import Flask, request, render_template, redirect
+from flask import Flask, request, render_template, session
 from os.path import splitext
 from flask_sslify import SSLify
+from flask_babel import Babel, gettext
 import os
 import json
 
@@ -14,19 +15,32 @@ is_prod = os.environ.get('PRODUCTION', None)
 ga_id = os.environ.get('GA_ID', None)
 
 app = Flask(__name__)
-if is_prod:
-    sslify = SSLify(app)
+
+app.config['BABEL_DEFAULT_LOCALE'] = 'en'
 app.config['MAX_CONTENT_LENGTH'] = 4096 * 1024
 app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png', '.jpeg']
+app.config['GITHUB_PROJECT'] = 'https://github.com/debba/greenpass-covid19-qrcode-decoder'
 app.config[
     'DCC_SCHEMA'] = 'https://raw.githubusercontent.com/ehn-dcc-development/ehn-dcc-schema/release/1.3.0/DCC.combined-schema.json'
 app.glb_schema = {}
 app.converted_schema = ''
+app.config['LANGUAGES'] = {
+    'en': 'English',
+    'it': 'Italiano'
+}
+babel = Babel(app)
+
+@babel.localeselector
+def get_locale():
+    return request.accept_languages.best_match(app.config['LANGUAGES'].keys())
+
+if is_prod:
+    sslify = SSLify(app)
 
 
 @app.context_processor
 def inject_user():
-    return dict(is_prod=is_prod, ga_id=ga_id)
+    return dict(github_project=app.config['GITHUB_PROJECT'], is_prod=is_prod, ga_id=ga_id, app_name=gettext('Green Pass COVID-19 QRCode Decoder'))
 
 
 def recursive_save_data(data, schema, level=0):
