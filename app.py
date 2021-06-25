@@ -4,13 +4,19 @@ from base45 import b45decode
 from zlib import decompress
 from flynn import decoder as flynn_decoder
 from urllib.request import urlopen
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect
 from os.path import splitext
+from flask_sslify import SSLify
+import os
 import json
 
+is_prod = os.environ.get('PRODUCTION', None)
+
 app = Flask(__name__)
+if is_prod:
+    sslify = SSLify(app)
 app.config['MAX_CONTENT_LENGTH'] = 4096 * 1024
-app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png']
+app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png', '.jpeg']
 app.config[
     'DCC_SCHEMA'] = 'https://raw.githubusercontent.com/ehn-dcc-development/ehn-dcc-schema/release/1.3.0/DCC.combined-schema.json'
 app.glb_schema = {}
