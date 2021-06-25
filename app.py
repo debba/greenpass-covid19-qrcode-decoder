@@ -11,6 +11,7 @@ import os
 import json
 
 is_prod = os.environ.get('PRODUCTION', None)
+ga_id = os.environ.get('GA_ID', None)
 
 app = Flask(__name__)
 if is_prod:
@@ -21,6 +22,11 @@ app.config[
     'DCC_SCHEMA'] = 'https://raw.githubusercontent.com/ehn-dcc-development/ehn-dcc-schema/release/1.3.0/DCC.combined-schema.json'
 app.glb_schema = {}
 app.converted_schema = ''
+
+
+@app.context_processor
+def inject_user():
+    return dict(is_prod=is_prod, ga_id=ga_id)
 
 
 def recursive_save_data(data, schema, level=0):
