@@ -13,7 +13,14 @@
 
 <main class="flex-shrink-0">
     <div class="container">
-        <div id="content">{% block content %}{% endblock %}</div>
+        <section class="py-5 text-center container">
+            <div class="row py-lg-5">
+                <div class="col-lg-6 col-md-8 mx-auto">
+                    <h1 class="fw-light">Green Pass Covid-19 QRCode Decoder</h1>
+                    <div id="content">{% block content %}{% endblock %}</div>
+                </div>
+            </div>
+        </section>
     </div>
 </main>
 
@@ -21,7 +28,8 @@
     <div class="container">
         {% block footer %}
         <p class="text-center">&copy; Copyright 2021 by <a href="https://www.dueclic.com">Andrea Debernardi</a>.</p>
-        <p class="text-center">This project is open source - <a href="https://github.com/debba/greenpass-covid19-qrcode-decoder">Github Repo</a></p>
+        <p class="text-center">This project is open source - <a
+                href="https://github.com/debba/greenpass-covid19-qrcode-decoder">Github Repo</a></p>
         {% endblock %}
     </div>
 </footer>

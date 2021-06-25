@@ -49,7 +49,7 @@ def qrdata():
         file_ext = splitext(filename)[1]
         if filename != '':
             if file_ext not in app.config['UPLOAD_EXTENSIONS']:
-                return render_template('error.html', error='UPLOAD_EXTENSIONS_ERROR'), 400
+                return render_template('error.html', error='UPLOAD_EXTENSIONS_ERROR', file_ext=file_ext), 400
 
         qr_decoded = decode(Image.open(image.stream))[0].data[4:]
         qrcode_data = decompress(b45decode(qr_decoded))

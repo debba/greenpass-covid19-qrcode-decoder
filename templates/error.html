@@ -2,10 +2,12 @@
 {% block title %}Error detected!{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <h2>ERROR</h2>
-        <div class="alert alert-danger">
-            {{error}}
-        </div>
-    </div>
+<div class="alert alert-danger">
+    {%if error == 'UPLOAD_EXTENSIONS_ERROR' %}
+    <p>Error: Image extension is not valid, extension provided: {{file_ext}} <a href="/" class="btn btn-danger">Retry now.</a></p>
+    {% endif %}
+    {%if error == 'UPLOAD_IMAGE_WITH_NO_NAME' %}
+    <p>ErrorGeneral error, please retry. <a href="/" class="btn btn-danger">Retry now.</a></p>
+    {% endif %}
+</div>
 {% endblock %}
