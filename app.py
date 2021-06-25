@@ -3,13 +3,12 @@ from PIL import Image
 from base45 import b45decode
 from zlib import decompress
 from flynn import decoder as flynn_decoder
-from urllib.request import urlopen
-from flask import Flask, request, render_template, session
+from flask import Flask, request, render_template
 from os.path import splitext
 from flask_sslify import SSLify
 from flask_babel import Babel, gettext
 import os
-import json
+from lib.datamapper import DataMapper as data_mapper
 
 is_prod = os.environ.get('PRODUCTION', None)
 ga_id = os.environ.get('GA_ID', None)
@@ -30,9 +29,11 @@ app.config['LANGUAGES'] = {
 }
 babel = Babel(app)
 
+
 @babel.localeselector
 def get_locale():
     return request.accept_languages.best_match(app.config['LANGUAGES'].keys())
+
 
 if is_prod:
     sslify = SSLify(app)
@@ -40,25 +41,8 @@ if is_prod:
 
 @app.context_processor
 def inject_user():
-    return dict(github_project=app.config['GITHUB_PROJECT'], is_prod=is_prod, ga_id=ga_id, app_name=gettext('Green Pass COVID-19 QRCode Decoder'))
-
-
-def recursive_save_data(data, schema, level=0):
-    for key, value in data.items():
-        description = schema[key].get('title') or schema[key].get('description') or key
-        description, _, _ = description.partition(' - ')
-        if type(value) is dict:
-            app.converted_schema += '<p>' + ('&nbsp;' * level) + '<strong>' + description + '</strong>' + '</p>'
-            _, _, sch_ref = schema[key]['$ref'].rpartition('/')
-            recursive_save_data(value, app.glb_schema['$defs'][sch_ref]['properties'], level + 1)
-        elif type(value) is list:
-            app.converted_schema += '<p>' + ('&nbsp;' * level) + '<strong>' + description + '</strong>' + '</p>'
-            _, _, sch_ref = schema[key]['items']['$ref'].rpartition('/')
-            for v in value:
-                recursive_save_data(v, app.glb_schema['$defs'][sch_ref]['properties'], level + 1)
-        else:  # value is scalar
-            app.converted_schema += '<p>' + ('&nbsp;' * level) + '<strong>' + description + '</strong>' + ':' + str(
-                value) + '</p>'
+    return dict(github_project=app.config['GITHUB_PROJECT'], is_prod=is_prod, ga_id=ga_id,
+                app_name=gettext('Green Pass COVID-19 QRCode Decoder'))
 
 
 @app.route('/', methods=['GET'])
@@ -81,13 +65,8 @@ def qrdata():
         qrcode_data = decompress(b45decode(qr_decoded))
         (_, (header_1, header_2, cbor_payload, sign)) = flynn_decoder.loads(qrcode_data)
         data = flynn_decoder.loads(cbor_payload)
-
-        sch = urlopen(app.config['DCC_SCHEMA'])
-        app.glb_schema = json.load(sch)
-
-        recursive_save_data(data[-260][1], app.glb_schema['properties'])
-
-        return render_template('data.html', data=app.converted_schema)
+        dm = data_mapper(data, app.config['DCC_SCHEMA'])
+        return render_template('data.html', data=dm.convert_json())
     return render_template('error.html', error='UPLOAD_IMAGE_WITH_NO_NAME')
 
 
