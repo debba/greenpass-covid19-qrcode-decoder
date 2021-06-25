@@ -2,11 +2,31 @@
 {% block title %}Decode Now!{% endblock %}
 
 {% block content %}
-<div class="bd-example" align="middle">
-    <h1>COVID 19 QRCODE DECODER</h1>
-    <form method="POST"  action="/qrdata"  enctype="multipart/form-data">
-        <input type="file" name="image">
-        <input type="submit">
-    </form>
-</div>
+
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">Green Pass Covid-19 QRCode Decoder</h1>
+            <p class="lead text-muted">
+                Do you want to know what information your Covid-19 Green Pass contains inside the QRCode? Upload it
+                here!
+            </p>
+            <ul class="small">
+                <li>No data will be stored</li>
+                <li>Don't you trust it? Explore the <a href="https://github.com/debba/greenpass-covid19-qrcode-decoder">open-source
+                    code</a> and create your own instance.
+                </li>
+            </ul>
+            <form method="POST" action="/qrdata" enctype="multipart/form-data">
+                <div class="input-group">
+                    <input type="file" name="image" accept="image/*" class="form-control" id="pickFileInput"
+                           aria-describedby="pickFile" aria-label="Browse">
+                    <button class="btn btn-outline-secondary" type="button" id="pickFile">Get data</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</section>
+
 {% endblock %}
