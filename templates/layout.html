@@ -2,13 +2,12 @@
 <html class="h-100" lang="en">
 <head>
     {% block head %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>Green Pass COVID-19  QRCode Decoder - {% block title %}{% endblock %}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta property="og:title" content="Green Pass COVID-19 QRCode Decoder - {% block title %}{% endblock %}" />
+    <meta property="og:title" content="Green Pass COVID-19 QRCode Decoder" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="{{ url_for('static', filename='images/ogimage.png') }}" />
     <meta property="og:url" content="{{ url_for(request.endpoint) }}" />
