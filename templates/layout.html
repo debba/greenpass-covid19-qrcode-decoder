@@ -7,24 +7,34 @@
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta property="og:title" content="Green Pass COVID-19 QRCode Decoder" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="{{ url_for('static', filename='images/ogimage.png') }}" />
-    <meta property="og:url" content="{{ url_for(request.endpoint) }}" />
+    {% if is_prod %}
+    <meta property="og:title" content="Green Pass COVID-19 QRCode Decoder"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content="{{ url_for('static', filename='images/ogimage.png') }}"/>
+    {% if app_url %}
+    <meta property="og:url" content="{{ app_url }}"/>
+    {%else %}}
+    <meta property="og:url" content="{{ url_for(request.endpoint) }}"/>
+    {% endif %}
+    {% endif %}}
 
     {% if is_prod and ga_id %}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-76509726-1"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-76509726-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
-          gtag('config', '{{ga_id}}');
-        </script>
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', '{{ga_id}}');
+    </script>
     {% endif %}
 
     {% if is_prod and sharethis_script_src %}}
-        <script type="text/javascript" src="{{sharethis_script_src}}" async="async"></script>
+    <script type="text/javascript" src="{{sharethis_script_src}}" async="async"></script>
     {% endif %}
 
 

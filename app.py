@@ -13,6 +13,7 @@ from lib.datamapper import DataMapper as data_mapper
 is_prod = os.environ.get('PRODUCTION', None)
 ga_id = os.environ.get('GA_ID', None)
 sharethis_script_src = os.environ.get('SHARETHIS_SCRIPT_SRC', None)
+app_url = os.environ.get('APP_URL', None)
 
 app = Flask(__name__)
 
@@ -42,7 +43,8 @@ if is_prod:
 
 @app.context_processor
 def inject_user():
-    return dict(github_project=app.config['GITHUB_PROJECT'], is_prod=is_prod, ga_id=ga_id, sharethis_script_src=sharethis_script_src,
+    return dict(github_project=app.config['GITHUB_PROJECT'], is_prod=is_prod, ga_id=ga_id,
+                sharethis_script_src=sharethis_script_src, app_url=app_url,
                 app_name=gettext('Green Pass COVID-19 QRCode Decoder'))
 
 
