@@ -18,6 +18,9 @@
     {% endif %}
     {% endif %}}
 
+    {% block script %}
+    {% endblock %}
+
     {% if is_prod and ga_id %}
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-76509726-1"></script>
     <script>
@@ -36,7 +39,6 @@
     {% if is_prod and sharethis_script_src %}
     <script type="text/javascript" src="{{sharethis_script_src}}" async="async"></script>
     {% endif %}
-
 
     {% endblock %}
 </head>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-07-22 09:26+0200\n"
+"POT-Creation-Date: 2021-07-22 13:41+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
 
-#: app.py:45
+#: app.py:48
 msgid "Green Pass COVID-19 QRCode Decoder"
 msgstr ""
 
@@ -25,7 +25,7 @@ msgstr ""
 msgid "Your personal details"
 msgstr ""
 
-#: templates/data.html:14
+#: templates/data.html:22
 msgid "Back to home page"
 msgstr ""
 
@@ -45,28 +45,34 @@ msgstr ""
 msgid "Error: image sent is not valid."
 msgstr ""
 
-#: templates/home.html:7
+#: templates/home.html:9
 msgid ""
 "What information does your Covid-19 Green Pass QR code contain? Please "
-"upload the file here to find out."
+"upload the file here to find\n"
+"            out."
 msgstr ""
 
-#: templates/home.html:10
+#: templates/home.html:13
 msgid "No data will be stored"
 msgstr ""
 
-#: templates/home.html:12
+#: templates/home.html:15
 #, python-format
 msgid ""
-"Don't you trust it? Explore the <a href=\"%(url)s\">open source code</a>"
-"  and create your own instance!"
+"Don't you trust it? Explore the <a href=\"%(url)s\">open source code</a> "
+"and\n"
+"                create your own instance!"
 msgstr ""
 
-#: templates/home.html:19
+#: templates/home.html:23
 msgid "Get data"
 msgstr ""
 
-#: templates/layout.html:48
+#: templates/home.html:43
+msgid "Please select the green pass qrcode first."
+msgstr ""
+
+#: templates/layout.html:64
 msgid "This project is open source"
 msgstr ""
 

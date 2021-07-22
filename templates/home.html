@@ -12,7 +12,7 @@
         {% trans url=github_project %}Don't you trust it? Explore the <a href="{{url}}">open source code</a>  and create your own instance!{% endtrans %}
     </li>
 </ul>
-<form method="POST" action="/qrdata" enctype="multipart/form-data">
+<form id="greenform" method="POST" action="/qrdata" enctype="multipart/form-data" >
     <div class="input-group">
         <input type="file" name="image" accept="image/*" class="form-control" id="pickFileInput"
                aria-describedby="pickFile" aria-label="Browse">
@@ -21,5 +21,22 @@
 
 </form>
 
+{% if is_prod and sharethis_script_src %}
+<div class="border border-light p-3 mb-4">
+    <div class="text-center">
+        <div class="sharethis-inline-share-buttons" data-url="{{ app_url }}"></div>
+    </div>
+</div>
+{% endif %}
 
+{% endblock %}
+
+{% block script %}
+<script>
+    var i18n = {
+        select_before: '{{ _("Please select the green pass qrcode first.") }}'
+    };
+</script>
+
+<script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
 {% endblock %}

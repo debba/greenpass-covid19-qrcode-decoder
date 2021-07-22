@@ -7,19 +7,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-07-22 09:26+0200\n"
-"PO-Revision-Date: 2021-07-22 09:52+0200\n"
+"POT-Creation-Date: 2021-07-22 13:41+0200\n"
+"PO-Revision-Date: 2021-07-22 13:33+0200\n"
 "Last-Translator: \n"
 "Language: it\n"
 "Language-Team: it <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
-"X-Generator: Poedit 3.0\n"
 
-#: app.py:45
+#: app.py:48
 msgid "Green Pass COVID-19 QRCode Decoder"
 msgstr "Green Pass COVID-19 QRCode Decoder"
 
@@ -27,7 +26,7 @@ msgstr "Green Pass COVID-19 QRCode Decoder"
 msgid "Your personal details"
 msgstr "I tuoi dati personali"
 
-#: templates/data.html:14
+#: templates/data.html:22
 msgid "Back to home page"
 msgstr "Torna alla home page"
 
@@ -47,31 +46,39 @@ msgstr "Errore generale: riprova tra poco."
 msgid "Error: image sent is not valid."
 msgstr "Errore: l'immagine inviata non è valida."
 
-#: templates/home.html:7
+#: templates/home.html:9
+#, fuzzy
 msgid ""
 "What information does your Covid-19 Green Pass QR code contain? Please "
-"upload the file here to find out."
+"upload the file here to find\n"
+"            out."
 msgstr ""
 "Quali informazioni contiene il QR code del tuo Green Pass COVID-19? "
 "Caricalo qui per scoprirlo."
 
-#: templates/home.html:10
+#: templates/home.html:13
 msgid "No data will be stored"
 msgstr "Nessun dato verrà memorizzato"
 
-#: templates/home.html:12
-#, python-format
+#: templates/home.html:15
+#, fuzzy, python-format
 msgid ""
-"Don't you trust it? Explore the <a href=\"%(url)s\">open source code</"
-"a>  and create your own instance!"
+"Don't you trust it? Explore the <a href=\"%(url)s\">open source code</a> "
+"and\n"
+"                create your own instance!"
 msgstr ""
 "Non ti fidi? Esplora il <a href=\"%(url)s\">codice open source</a>  e "
 "crea la tua istanza!"
 
-#: templates/home.html:19
+#: templates/home.html:23
 msgid "Get data"
 msgstr "Ottieni dati"
 
-#: templates/layout.html:48
+#: templates/home.html:43
+msgid "Please select the green pass qrcode first."
+msgstr "Selezionare prima il qrcode del greenpass per continuare."
+
+#: templates/layout.html:64
 msgid "This project is open source"
 msgstr "Questo progetto è open source"
+
