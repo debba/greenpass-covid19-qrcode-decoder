@@ -23,6 +23,10 @@
         </script>
     {% endif %}
 
+    {% if is_prod and sharethis_script_src %}}
+        <script type="text/javascript" src="{{sharethis_script_src}}" async="async"></script>
+    {% endif %}
+
 
     {% endblock %}
 </head>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-06-25 12:48+0200\n"
+"POT-Creation-Date: 2021-07-22 09:26+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
 
-#: app.py:43
+#: app.py:45
 msgid "Green Pass COVID-19 QRCode Decoder"
 msgstr ""
 
@@ -33,8 +33,16 @@ msgstr ""
 msgid "Error: image extension is not valid."
 msgstr ""
 
+#: templates/error.html:7 templates/error.html:10 templates/error.html:13
+msgid "Retry now.."
+msgstr ""
+
 #: templates/error.html:10
 msgid "General Error: please retry."
+msgstr ""
+
+#: templates/error.html:13
+msgid "Error: image sent is not valid."
 msgstr ""
 
 #: templates/home.html:7

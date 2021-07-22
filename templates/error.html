@@ -4,10 +4,13 @@
 {% block content %}
 <div class="alert alert-danger">
     {%if error == 'UPLOAD_EXTENSIONS_ERROR' %}
-    <p>{{ _('Error: image extension is not valid.') }} <a href="/" class="btn btn-danger">Retry now.</a></p>
+    <p>{{ _('Error: image extension is not valid.') }} <a href="/" class="btn btn-danger">{{ _('Retry now..') }}</a></p>
     {% endif %}
     {%if error == 'UPLOAD_IMAGE_WITH_NO_NAME' %}
-    <p>{{ _('General Error: please retry.') }} <a href="/" class="btn btn-danger">Retry now.</a></p>
+    <p>{{ _('General Error: please retry.') }} <a href="/" class="btn btn-danger">{{ _('Retry now..') }}</a></p>
+    {% endif %}
+    {%if error == 'UPLOAD_IMAGE_NOT_VALID' %}
+    <p>{{ _('Error: image sent is not valid.') }} <a href="/" class="btn btn-danger">{{ _('Retry now..') }}</a></p>
     {% endif %}
 </div>
 {% endblock %}

@@ -9,6 +9,14 @@
     </div>
 </div>
 
+{% if is_prod and sharethis_script_src %}}
+<div class="border border-light p-3 mb-4">
+    <div class="text-center">
+        <div class="sharethis-inline-share-buttons"></div>
+    </div>
+</div>
+{% endif %}
+
 <div class="border border-light p-3 mb-4">
     <div class="text-center">
         <a href="/" class="btn btn-primary">{{ _('Back to home page') }}</a>

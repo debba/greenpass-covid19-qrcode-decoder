@@ -12,6 +12,7 @@ from lib.datamapper import DataMapper as data_mapper
 
 is_prod = os.environ.get('PRODUCTION', None)
 ga_id = os.environ.get('GA_ID', None)
+sharethis_script_src = os.environ.get('SHARETHIS_SCRIPT_SRC', None)
 
 app = Flask(__name__)
 
@@ -41,7 +42,7 @@ if is_prod:
 
 @app.context_processor
 def inject_user():
-    return dict(github_project=app.config['GITHUB_PROJECT'], is_prod=is_prod, ga_id=ga_id,
+    return dict(github_project=app.config['GITHUB_PROJECT'], is_prod=is_prod, ga_id=ga_id, sharethis_script_src=sharethis_script_src,
                 app_name=gettext('Green Pass COVID-19 QRCode Decoder'))
 
 
@@ -61,12 +62,16 @@ def qrdata():
             if file_ext not in app.config['UPLOAD_EXTENSIONS']:
                 return render_template('error.html', error='UPLOAD_EXTENSIONS_ERROR', file_ext=file_ext), 400
 
-        qr_decoded = decode(Image.open(image.stream))[0].data[4:]
-        qrcode_data = decompress(b45decode(qr_decoded))
-        (_, (header_1, header_2, cbor_payload, sign)) = flynn_decoder.loads(qrcode_data)
-        data = flynn_decoder.loads(cbor_payload)
-        dm = data_mapper(data, app.config['DCC_SCHEMA'])
-        return render_template('data.html', data=dm.convert_json())
+        try:
+            qr_decoded = decode(Image.open(image.stream))[0].data[4:]
+            qrcode_data = decompress(b45decode(qr_decoded))
+            (_, (header_1, header_2, cbor_payload, sign)) = flynn_decoder.loads(qrcode_data)
+            data = flynn_decoder.loads(cbor_payload)
+            dm = data_mapper(data, app.config['DCC_SCHEMA'])
+            return render_template('data.html', data=dm.convert_json())
+        except ValueError:
+            return render_template('error.html', error='UPLOAD_IMAGE_NOT_VALID')
+
     return render_template('error.html', error='UPLOAD_IMAGE_WITH_NO_NAME')
 
 
