@@ -72,9 +72,9 @@ def qrdata():
             dm = data_mapper(data, app.config['DCC_SCHEMA'])
             return render_template('data.html', data=dm.convert_json())
         except ValueError:
-            return render_template('error.html', error='UPLOAD_IMAGE_NOT_VALID')
+            return render_template('error.html', error='UPLOAD_IMAGE_NOT_VALID'), 400
 
-    return render_template('error.html', error='UPLOAD_IMAGE_WITH_NO_NAME')
+    return render_template('error.html', error='UPLOAD_IMAGE_WITH_NO_NAME'), 500
 
 
 if __name__ == '__main__':
