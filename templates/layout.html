@@ -13,10 +13,10 @@
     <meta property="og:image" content="{{ url_for('static', filename='images/ogimage.png') }}"/>
     {% if app_url %}
     <meta property="og:url" content="{{ app_url }}"/>
-    {%else %}}
+    {%else %}
     <meta property="og:url" content="{{ url_for(request.endpoint) }}"/>
     {% endif %}
-    {% endif %}}
+    {% endif %}
 
     {% block script %}
     {% endblock %}
@@ -62,7 +62,9 @@
         {% block footer %}
         <p class="text-center">&copy; Copyright 2021 by <a href="https://www.dueclic.com">Andrea Debernardi</a>.</p>
         <p class="text-center">{{ _('This project is open source') }} ❤️| <a
-                href="{{ github_project }}">Github Repo</a> <img alt="GitHub followers" src="https://img.shields.io/github/followers/debba?style=social"></p>
+                href="{{ github_project }}">Github Repo</a> <img alt="GitHub followers"
+                                                                 src="https://img.shields.io/github/followers/debba?style=social">
+        </p>
         {% endblock %}
     </div>
 </footer>
