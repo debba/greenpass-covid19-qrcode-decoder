@@ -1,0 +1,14 @@
+{% if is_prod and sharethis_script_src %}
+<div class="border border-light p-3 mb-4">
+    <div class="text-center">
+        <div class="sharethis-inline-share-buttons" data-url="{{ app_url }}"></div>
+    </div>
+</div>
+{% endif %}
+
+<div class="border border-light p-3 mb-4">
+    <div class="text-center">
+        <img alt="GitHub stars" src="https://img.shields.io/github/stars/debba/greenpass-covid19-qrcode-decoder?style=social">
+        <img alt="Github last commit" src="https://img.shields.io/github/last-commit/debba/greenpass-covid19-qrcode-decoder/master">
+    </div>
+</div>

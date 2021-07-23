@@ -9,13 +9,7 @@
     </div>
 </div>
 
-{% if is_prod and sharethis_script_src %}
-<div class="border border-light p-3 mb-4">
-    <div class="text-center">
-        <div class="sharethis-inline-share-buttons" data-url="{{ app_url }}"></div>
-    </div>
-</div>
-{% endif %}
+{% include 'sharing.html' %}
 
 <div class="border border-light p-3 mb-4">
     <div class="text-center">
