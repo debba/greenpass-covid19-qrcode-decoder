@@ -19,9 +19,3 @@ class GreenPassDecoder(object):
         data = flynn_decoder.loads(cbor_payload)
         dm = data_mapper(data, schema)
         return dm.convert_json()
-
-    def is_valid(self):
-        ct = self.data["ct"]
-        if ct not in (1, 2):
-            return False
-        return True
