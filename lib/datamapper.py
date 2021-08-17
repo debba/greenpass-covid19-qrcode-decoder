@@ -1,6 +1,7 @@
 import json
 from urllib.request import urlopen
 
+
 class DataMapperError(Exception):
     pass
 
@@ -17,20 +18,17 @@ class DataMapper:
             description = schema[key].get('title') or schema[key].get('description') or key
             description, _, _ = description.partition(' - ')
             if type(value) is dict:
-                print('DICT')
 
                 self.json += '<p>' + ('&nbsp;' * level) + '<strong>' + description + '</strong>' + '</p>'
                 _, _, sch_ref = schema[key]['$ref'].rpartition('/')
                 self._save_json(value, self.schema['$defs'][sch_ref]['properties'], level + 1)
             elif type(value) is list:
-                print('LL')
 
                 self.json += '<p>' + ('&nbsp;' * level) + '<strong>' + description + '</strong>' + '</p>'
                 _, _, sch_ref = schema[key]['items']['$ref'].rpartition('/')
                 for v in value:
                     self._save_json(v, self.schema['$defs'][sch_ref]['properties'], level + 1)
             else:  # value is scalar
-                print('SC')
                 self.json += '<p>' + ('&nbsp;' * level) + '<strong>' + description + '</strong>' + ':' + str(
                     value) + '</p>'
 

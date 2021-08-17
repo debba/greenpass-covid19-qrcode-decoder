@@ -1,14 +1,9 @@
-from pyzbar.pyzbar import decode
-from PIL import Image
-from base45 import b45decode
-from zlib import decompress
-from flynn import decoder as flynn_decoder
 from flask import Flask, redirect, request, render_template
 from os.path import splitext
 from flask_sslify import SSLify
 from flask_babel import Babel, gettext
 import os
-from lib.datamapper import DataMapper as data_mapper
+from lib.greenpass import GreenPassDecoder as greenpass_decoder
 
 is_prod = os.environ.get('PRODUCTION', None)
 ga_id = os.environ.get('GA_ID', None)
@@ -65,14 +60,10 @@ def qrdata():
                     return render_template('error.html', error='UPLOAD_EXTENSIONS_ERROR', file_ext=file_ext), 400
 
             try:
-                qr_decoded = decode(Image.open(image.stream))[0].data[4:]
-                qrcode_data = decompress(b45decode(qr_decoded))
-                (_, (header_1, header_2, cbor_payload, sign)) = flynn_decoder.loads(qrcode_data)
-                data = flynn_decoder.loads(cbor_payload)
-                dm = data_mapper(data, app.config['DCC_SCHEMA'])
-                return render_template('data.html', data=dm.convert_json())
-
+                decoder = greenpass_decoder(image.stream)
+                return render_template('data.html', data=decoder.decode(app.config['DCC_SCHEMA']))
             except (ValueError, IndexError) as e:
+                print(e)
                 return render_template('error.html', error='UPLOAD_IMAGE_NOT_VALID'), 400
 
         return render_template('error.html', error='UPLOAD_IMAGE_WITH_NO_NAME'), 500
