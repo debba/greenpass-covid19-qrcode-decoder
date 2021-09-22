@@ -14,23 +14,26 @@ class DataMapper:
     new_json = {}
 
     def _save_json(self, data, schema, level=0):
-        for key, value in data.items():
-            description = schema[key].get('title') or schema[key].get('description') or key
-            description, _, _ = description.partition(' - ')
-            if type(value) is dict:
 
-                self.json += '<p>' + ('&nbsp;' * level) + '<strong>' + description + '</strong>' + '</p>'
-                _, _, sch_ref = schema[key]['$ref'].rpartition('/')
-                self._save_json(value, self.schema['$defs'][sch_ref]['properties'], level + 1)
-            elif type(value) is list:
-
-                self.json += '<p>' + ('&nbsp;' * level) + '<strong>' + description + '</strong>' + '</p>'
-                _, _, sch_ref = schema[key]['items']['$ref'].rpartition('/')
-                for v in value:
-                    self._save_json(v, self.schema['$defs'][sch_ref]['properties'], level + 1)
-            else:  # value is scalar
-                self.json += '<p>' + ('&nbsp;' * level) + '<strong>' + description + '</strong>' + ':' + str(
-                    value) + '</p>'
+            for key, value in data.items():
+                try:
+                    description = schema[key].get('title') or schema[key].get('description') or key
+                    description, _, _ = description.partition(' - ')
+                    if type(value) is dict:
+                        self.json += '<p>' + ('&nbsp;' * level) + '<strong>' + description + '</strong></p>'
+                        _, _, sch_ref = schema[key]['$ref'].rpartition('/')
+                        self._save_json(value, self.schema['$defs'][sch_ref]['properties'], level + 1)
+                    elif type(value) is list:
+                        self.json += '<p>' + ('&nbsp;' * level) + '<strong>' + description + '</strong></p>'
+                        _, _, sch_ref = schema[key]['items']['$ref'].rpartition('/')
+                        for v in value:
+                            self._save_json(v, self.schema['$defs'][sch_ref]['properties'], level + 1)
+                    else:
+                        self.json += '<p>' + ('&nbsp;' * level) + '<strong>' + description + '</strong>' + ':' + str(
+                            value) + '</p>'
+                except KeyError:
+                    print('error keys')
+                    print(data)
 
     def __set_schema(self, schema_url):
         sch = urlopen(schema_url)
