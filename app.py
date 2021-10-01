@@ -9,7 +9,6 @@ is_prod = os.environ.get('PRODUCTION', None)
 ga_id = os.environ.get('GA_ID', None)
 sharethis_script_src = os.environ.get('SHARETHIS_SCRIPT_SRC', None)
 app_url = os.environ.get('APP_URL', None)
-letsencrypt_token = os.environ.get('LETSENCRYPT_TOKEN', None)
 
 app = Flask(__name__)
 
@@ -71,12 +70,3 @@ def qrdata():
         return render_template('error.html', error='UPLOAD_IMAGE_WITH_NO_NAME'), 500
     else:
         return redirect('/')
-
-
-if letsencrypt_token is not None:
-    @app.route('/.well-known/acme-challenge/<content>', methods=['GET'])
-    def acme(content):
-        return letsencrypt_token
-
-if __name__ == '__main__':
-    app.run(debug=True)
