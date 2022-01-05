@@ -18,6 +18,7 @@ app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png', '.jpeg']
 app.config['GITHUB_PROJECT'] = 'https://github.com/debba/greenpass-covid19-qrcode-decoder'
 app.config[
     'DCC_SCHEMA'] = 'https://raw.githubusercontent.com/ehn-dcc-development/ehn-dcc-schema/release/1.3.0/DCC.combined-schema.json'
+app.config['SETTINGS_SCHEMA'] = 'https://get.dgc.gov.it/v1/dgc/settings'
 app.glb_schema = {}
 app.converted_schema = ''
 app.config['LANGUAGES'] = {
@@ -62,7 +63,8 @@ def qrdata():
 
             try:
                 decoder = greenpass_decoder(image.stream)
-                return render_template('data.html', data=decoder.decode(app.config['DCC_SCHEMA']))
+                return render_template('data.html', data=decoder.decode(app.config['DCC_SCHEMA'],
+                                                                        app.config['SETTINGS_SCHEMA']))
             except (ValueError, IndexError) as e:
                 print(e)
                 return render_template('error.html', error='UPLOAD_IMAGE_NOT_VALID'), 400
