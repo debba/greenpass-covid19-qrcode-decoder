@@ -18,7 +18,8 @@ app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png', '.jpeg']
 app.config['GITHUB_PROJECT'] = 'https://github.com/debba/greenpass-covid19-qrcode-decoder'
 app.config[
     'DCC_SCHEMA'] = 'data/DCC.combined-schema.json'
-app.config['SETTINGS_SCHEMA'] = 'data/settings.json' ''' from https://get.dgc.gov.it/v1/dgc/settings '''
+app.config['SETTINGS_SCHEMA'] = 'data/settings.json'
+''' from https://get.dgc.gov.it/v1/dgc/settings '''
 app.glb_schema = {}
 app.converted_schema = ''
 app.config['LANGUAGES'] = {
