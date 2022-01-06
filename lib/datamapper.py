@@ -50,11 +50,11 @@ class DataMapper:
                 print(data)
 
     def __set_schema(self, schema_url):
-        sch = urlopen(schema_url)
+        sch = open(schema_url)
         self.schema = json.load(sch)
 
     def __set_settings(self, settings_url):
-        sch = urlopen(settings_url)
+        sch = open(settings_url)
         self.settings = json.load(sch)
 
     def __init__(self, qr_data, schema_url, settings_url, params_string=False):
