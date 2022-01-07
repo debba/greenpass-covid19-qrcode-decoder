@@ -2,3 +2,4 @@
 tests
 venv/
 .docker-env
+data/

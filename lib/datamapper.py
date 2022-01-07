@@ -1,6 +1,6 @@
 import json
 import datetime
-from urllib.request import urlopen
+from lib.utils import get_json_file
 
 
 class DataMapperError(Exception):
@@ -50,12 +50,10 @@ class DataMapper:
                 print(data)
 
     def __set_schema(self, schema_url):
-        sch = open(schema_url)
-        self.schema = json.load(sch)
+        self.schema = get_json_file(schema_url, "https://raw.githubusercontent.com/ehn-dcc-development/ehn-dcc-schema/release/1.3.0/DCC.combined-schema.json")
 
     def __set_settings(self, settings_url):
-        sch = open(settings_url)
-        self.settings = json.load(sch)
+        self.settings = get_json_file(settings_url, "https://get.dgc.gov.it/v1/dgc/settings")
 
     def __init__(self, qr_data, schema_url, settings_url, params_string=False):
 
