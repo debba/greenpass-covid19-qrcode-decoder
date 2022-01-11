@@ -22,7 +22,7 @@
     {% endblock %}
 
     {% if is_prod and ga_id %}
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-76509726-1"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-{{ga_id}}"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
 
@@ -32,7 +32,7 @@
 
         gtag('js', new Date());
 
-        gtag('config', '{{ga_id}}');
+        gtag('config', 'UA-{{ga_id}}');
     </script>
     {% endif %}
 
