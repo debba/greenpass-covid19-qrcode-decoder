@@ -1,5 +1,5 @@
 import json
-import os.path
+import os
 import os.path as path
 import urllib.request
 import time
@@ -19,6 +19,7 @@ def download_from_remote(remote_url, local_file):
     if response.status == 200:
         resource = response.read()
 
+        os.makedirs(path.dirname(local_file), exist_ok=True)
         with open(local_file, "wb") as file:
             file.write(resource)
 

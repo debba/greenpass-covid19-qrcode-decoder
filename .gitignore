@@ -2,4 +2,4 @@
 tests
 venv/
 .docker-env
-data/
+data/*.json
