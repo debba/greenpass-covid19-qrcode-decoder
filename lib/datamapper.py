@@ -14,16 +14,13 @@ class DataMapper:
     json = ''
     new_json = {}
 
-    def _set_expires_at(self, type):
-        by_type = [x for x in self.settings if x['type'] == type and x['name'] == "vaccine_end_day_complete"]
+    def _set_expires_at(self, expires_value):
+
+        by_type = [x for x in self.settings if x['type'] == expires_value and x['name'] == "vaccine_end_day_complete"]
         if len(by_type) > 0:
             self.expires_at = datetime.datetime.strftime(
                 datetime.datetime.fromtimestamp(self.issued_at) + datetime.timedelta(days=int(by_type[0]['value']))
                 , '%Y-%m-%d')
-        else:
-            self.expires_at = datetime.datetime.strftime(
-                datetime.datetime.fromtimestamp(self.expires_at),
-                '%Y-%m-%d')
 
     def _save_json(self, data, schema, level=0):
 
@@ -50,7 +47,8 @@ class DataMapper:
                 print(data)
 
     def __set_schema(self, schema_url):
-        self.schema = get_json_file(schema_url, "https://raw.githubusercontent.com/ehn-dcc-development/ehn-dcc-schema/release/1.3.0/DCC.combined-schema.json")
+        self.schema = get_json_file(schema_url,
+                                    "https://raw.githubusercontent.com/ehn-dcc-development/ehn-dcc-schema/release/1.3.0/DCC.combined-schema.json")
 
     def __set_settings(self, settings_url):
         self.settings = get_json_file(settings_url, "https://get.dgc.gov.it/v1/dgc/settings")
@@ -66,15 +64,17 @@ class DataMapper:
 
         self.json = ''
         self.qr_data = qr_data[i][j]
-        self.expires_at = qr_data[4]
+        self.expires_at = datetime.datetime.strftime(
+                datetime.datetime.fromtimestamp(qr_data[4]),
+                '%Y-%m-%d')
         self.issued_at = qr_data[6]
         self.__set_schema(schema_url)
         self.__set_settings(settings_url)
 
     def _get_header(self):
-        header = '<p><strong>Issued on</strong>' + ':' + datetime.datetime.utcfromtimestamp(self.issued_at)\
+        header = '<p><strong>Issued on</strong>' + ':' + datetime.datetime.utcfromtimestamp(self.issued_at) \
             .strftime('%Y-%m-%d') + '</p> '
-        header += '<p><strong>Expires at</strong>' + ':' + str(
+        header += '<p><strong>Document expires at</strong>' + ':' + str(
             self.expires_at) + '</p>'
         return header
 
